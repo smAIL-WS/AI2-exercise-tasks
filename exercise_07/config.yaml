@@ -1,0 +1,42 @@
+# ============================================================================
+# Exercise 07: Few-Shot Finetuning for Segmentation — Configuration
+# ============================================================================
+
+experiment_name: "phenobench_segformer_fewshot"
+seed: 42
+
+# --- Data ---
+data:
+  root_dir: "data/phenobench"
+  image_size: 512               # matches the pretrained SegFormer checkpoint's native resolution
+  num_shots: 20                 # NOTE: placeholder -- confirm the final few-shot budget with the course team
+  batch_size: 4
+  num_workers: 4
+
+# --- Model ---
+# HuggingFace model id. The decode head is replaced for num_classes
+# regardless of what the checkpoint was originally trained on.
+model:
+  name: "nvidia/segformer-b0-finetuned-ade-512-512"
+  num_classes: 3                # background + crop + weed
+  freeze_encoder: true          # required strategy: freeze everything except the decode head
+
+# --- Training ---
+training:
+  epochs: 60                    # more than Ex06 -- a few-shot epoch is only a handful of batches
+  learning_rate: 0.001
+  optimizer: "adamw"
+  weight_decay: 0.0001
+
+# --- Checkpointing ---
+checkpoint:
+  save_dir: "outputs/checkpoints"
+  save_best_only: true
+
+# --- Logging ---
+logging:
+  log_dir: "outputs/logs"
+  log_interval: 5
+
+# --- Device ---
+device: "cuda"

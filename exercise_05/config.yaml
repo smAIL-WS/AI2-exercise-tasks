@@ -1,0 +1,47 @@
+# ============================================================================
+# Exercise 05: Object Detection — Configuration
+# ============================================================================
+
+experiment_name: "phenobench_detection"
+seed: 42
+
+# --- Data ---
+data:
+  root_dir: "data/phenobench_256"
+  image_size: 256              # Faster R-CNN internally resizes; this is the min side
+  batch_size: 4                # detection batches are larger in memory than classification
+  num_workers: 4
+
+# --- Model ---
+# Supported: "fasterrcnn_resnet50", "fasterrcnn_mobilenet", "retinanet_resnet50", "rtdetr"
+
+model:
+  name: "fasterrcnn_resnet50"
+  num_classes: 3               # background + crop + weed
+  pretrained: true
+  pretrained_backbone: true
+
+# --- Training ---
+training:
+  epochs: 15
+  learning_rate: 0.005
+  optimizer: "sgd"             # SGD with momentum is standard for Faster R-CNN
+  momentum: 0.9
+  weight_decay: 0.0005
+  
+  # learning_rate: 0.0001
+  # optimizer: "adamw"          # AdamW is standard for RTDETR
+  # weight_decay: 0.0001
+
+# --- Checkpointing ---
+checkpoint:
+  save_dir: "outputs/checkpoints"
+  save_best_only: true
+
+# --- Logging ---
+logging:
+  log_dir: "outputs/logs"
+  log_interval: 10
+
+# --- Device ---
+device: "cuda"

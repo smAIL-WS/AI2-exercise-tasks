@@ -1,0 +1,46 @@
+# ============================================================================
+# Exercise 03: Image Classification — Training Configuration
+# ============================================================================
+# All hyperparameters are defined here. The training script reads this file
+# so that nothing is hardcoded. To compare experiments, copy this file,
+# change settings, and pass the new config to train.py.
+#
+# Project structure inspired by: https://github.com/victoresque/pytorch-template
+# ============================================================================
+
+# --- Experiment ---
+experiment_name: "plantwild_baseline"
+seed: 42
+
+# --- Data ---
+data:
+  root_dir: "data/plantwild"
+  image_size: 128
+  batch_size: 32
+  num_workers: 4
+  augmentation: true         # set to false to compare training without augmentation
+
+# --- Model ---
+model:
+  num_classes: 10            # adjust to match your dataset subset
+  dropout: 0.5
+
+# --- Training ---
+training:
+  epochs: 30
+  learning_rate: 0.001
+  optimizer: "adam"           # "adam" or "sgd"
+  weight_decay: 0.0001
+
+# --- Checkpointing ---
+checkpoint:
+  save_dir: "outputs/checkpoints"
+  save_best_only: true       # only save when val accuracy improves
+
+# --- Logging ---
+logging:
+  log_dir: "outputs/logs"
+  log_interval: 10           # print training loss every N batches
+
+# --- Device ---
+device: "cuda"               # "cuda" or "cpu"
