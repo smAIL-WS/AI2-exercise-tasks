@@ -61,7 +61,7 @@ Cloning downloads a repository from GitHub to your local machine so you can work
 
 ### Task 2
 
-1. Go to the course repository on GitHub ( **TODO:** URL provided by your instructor).
+1. Go to the course repository start page on GitHub ([here](https://github.com/smAIL-WS/AI2-exercise-tasks)).
 2. Click the **Fork** button in the top-right corner. This creates a copy under your own GitHub account.
 3. On **your forked repository** page, click the green **Code** button and copy the HTTPS URL.
 4. Open a terminal, it should open in your home directory.
@@ -77,7 +77,7 @@ git clone <paste-your-fork-url-here>
 cd <repository-name>/exercise_01
 ```
 
-You now have a local copy of the course repository on your machine inside the `TODO` folder, linked to your fork on GitHub.
+You now have a local copy of the course repository on your machine inside your home directory, linked to your fork on GitHub.
 
 ---
 
